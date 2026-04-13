@@ -4,7 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Әзірлеушіге арналған ЖИ-құралдары</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Барлық стиль осы жерде, бөлек файл керек емес */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #2f3640;
+        }
+
+        header {
+            background-color: #1a2a3a;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Компьютерде 3 карточканы қатар тізіп қою */
+        .cards-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            width: 30%; /* Карточкалардың енін компьютерге лайықтау */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card h2 {
+            color: #00a8ff;
+            border-bottom: 2px solid #00a8ff;
+            padding-bottom: 10px;
+        }
+
+        .btn {
+            display: block;
+            margin-top: auto;
+            background-color: #00a8ff;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .experience-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 8px solid #00a8ff;
+        }
+
+        /* Егер экран өте тар болса, карточкаларды астына түсіру */
+        @media (max-width: 900px) {
+            .cards-grid {
+                flex-direction: column;
+            }
+            .card {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -14,61 +88,45 @@
 
     <div class="container">
         <div class="cards-grid">
-            
             <div class="card">
                 <h2>GitHub Copilot</h2>
-                <p>Бұл бағдарламалаушының жұмысын жеделдететін ең танымал ЖИ-көмекші. Ол нақты уақытта код жолдарын немесе толық функцияларды ұсынады.</p>
+                <p>Код жазуды жеделдететін интеллектуалды көмекші. Ол сіздің жазу стиліңізге қарай код ұсынады.</p>
                 <strong>Мүмкіндіктері:</strong>
                 <ul>
-                    <li>Кодты автоматты аяқтау</li>
-                    <li>Түсініктеме бойынша код жазу</li>
-                    <li>Unit тесттерді құрастыру</li>
+                    <li>Авто-толықтыру</li>
+                    <li>Тест жазу</li>
                 </ul>
                 <a href="https://github.com/features/copilot" target="_blank" class="btn">Ресми сайт</a>
             </div>
 
             <div class="card">
                 <h2>ChatGPT</h2>
-                <p>OpenAI ұсынған көпфункционалды модель. Ол логикалық есептерді шешуде және кодтағы қателерді іздеуде өте тиімді көмекші.</p>
+                <p>Кез келген тілде код жаза алатын және қателерді талдайтын әмбебап ЖИ моделі.</p>
                 <strong>Мүмкіндіктері:</strong>
                 <ul>
-                    <li>Debugging (қатемен жұмыс)</li>
-                    <li>Алгоритмдерді түсіндіру</li>
-                    <li>Құжаттама жазу</li>
+                    <li>Кодты түзету</li>
+                    <li>Түсіндірме беру</li>
                 </ul>
                 <a href="https://chatgpt.com" target="_blank" class="btn">Ресми сайт</a>
             </div>
 
             <div class="card">
                 <h2>Claude</h2>
-                <p>Anthropic компаниясының моделі, ол үлкен көлемдегі кодтық базаны талдау қабілетімен және "таза" код жазуымен танымал.</p>
+                <p>Үлкен деректермен жұмыс істеуге ыңғайлы, адамға жақын стильде жауап беретін ЖИ.</p>
                 <strong>Мүмкіндіктері:</strong>
                 <ul>
-                    <li>Күрделі контексті талдау</li>
-                    <li>Кодты рефакторинг жасау</li>
-                    <li>Техникалық тапсырмаларды өңдеу</li>
+                    <li>Құжаттарды талдау</li>
+                    <li>Таза код жазу</li>
                 </ul>
                 <a href="https://claude.ai" target="_blank" class="btn">Ресми сайт</a>
             </div>
-
         </div>
 
         <section class="experience-section">
             <h2>Менің тәжірибем</h2>
-            <div class="text-block">
-                <p>
-                    Тәжірибе барысында мен <strong>ChatGPT</strong>-ді күрделі функциялардың логикасын түсіндіру үшін қолдандым. Ол кодтағы логикалық қателерді тез тауып қана қоймай, оны жақсартудың тиімді жолдарын ұсынды.
-                </p>
-                <p>
-                    Ал <strong>GitHub Copilot</strong> күнделікті қайталанатын кодтарды жазу кезінде уақытымды айтарлықтай үнемдеуге көмектесті. Бұл құралдарды біріктіріп қолдану бағдарламалау процесін жеңілдетіп, нәтижені сапалы етеді.
-                </p>
-            </div>
+            <p>Мен ЖИ құралдарын бағдарламалау кезіндегі қиын есептерді шешу үшін қолдандым. Бұл кодтың сапасын арттырып, жұмыс жылдамдығын екі есеге арттыруға көмектесті.</p>
         </section>
     </div>
-
-    <footer>
-        <p>&copy; 2024 — Әзірлеушілерге арналған білім порталы</p>
-    </footer>
 
 </body>
 </html>
