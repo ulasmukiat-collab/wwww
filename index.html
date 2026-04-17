@@ -1,132 +1,105 @@
-<!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Әзірлеушіге арналған ЖИ-құралдары</title>
-    <style>
-        /* Барлық стиль осы жерде, бөлек файл керек емес */
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            background-color: #f0f2f5;
-            color: #2f3640;
-        }
+<!-- Чат батырмасы -->
+<div id="chat-toggle">💬</div>
 
-        header {
-            background-color: #1a2a3a;
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
+<!-- Чат терезесі -->
+<div id="chat-box">
+    <div id="chat-header">AI Чат</div>
+    <div id="chat-messages"></div>
+    <input type="text" id="chat-input" placeholder="Сұрақ жазыңыз..." />
+</div>
 
-        .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
+<style>
+#chat-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #00a8ff;
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+}
 
-        /* Компьютерде 3 карточканы қатар тізіп қою */
-        .cards-grid {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
+#chat-box {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+}
 
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            width: 30%; /* Карточкалардың енін компьютерге лайықтау */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-        }
+#chat-header {
+    background: #1a2a3a;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
 
-        .card h2 {
-            color: #00a8ff;
-            border-bottom: 2px solid #00a8ff;
-            padding-bottom: 10px;
-        }
+#chat-messages {
+    height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    font-size: 14px;
+}
 
-        .btn {
-            display: block;
-            margin-top: auto;
-            background-color: #00a8ff;
-            color: white;
-            text-decoration: none;
-            text-align: center;
-            padding: 10px;
-            border-radius: 6px;
-            font-weight: bold;
-        }
+#chat-input {
+    border: none;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    outline: none;
+}
+</style>
 
-        .experience-section {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            border-left: 8px solid #00a8ff;
-        }
+<script>
+const toggle = document.getElementById("chat-toggle");
+const chatBox = document.getElementById("chat-box");
+const input = document.getElementById("chat-input");
+const messages = document.getElementById("chat-messages");
 
-        /* Егер экран өте тар болса, карточкаларды астына түсіру */
-        @media (max-width: 900px) {
-            .cards-grid {
-                flex-direction: column;
-            }
-            .card {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
+toggle.onclick = () => {
+    chatBox.style.display = chatBox.style.display === "flex" ? "none" : "flex";
+    chatBox.style.flexDirection = "column";
+};
 
-    <header>
-        <h1>Әзірлеушіге арналған ЖИ-құралдары</h1>
-    </header>
+input.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        let userText = input.value;
+        addMessage("Сіз: " + userText);
+        input.value = "";
 
-    <div class="container">
-        <div class="cards-grid">
-            <div class="card">
-                <h2>GitHub Copilot</h2>
-                <p>Код жазуды жеделдететін интеллектуалды көмекші. Ол сіздің жазу стиліңізге қарай код ұсынады.</p>
-                <strong>Мүмкіндіктері:</strong>
-                <ul>
-                    <li>Авто-толықтыру</li>
-                    <li>Тест жазу</li>
-                </ul>
-                <a href="https://github.com/features/copilot" target="_blank" class="btn">Ресми сайт</a>
-            </div>
+        setTimeout(() => {
+            let botReply = getBotReply(userText);
+            addMessage("Бот: " + botReply);
+        }, 500);
+    }
+});
 
-            <div class="card">
-                <h2>ChatGPT</h2>
-                <p>Кез келген тілде код жаза алатын және қателерді талдайтын әмбебап ЖИ моделі.</p>
-                <strong>Мүмкіндіктері:</strong>
-                <ul>
-                    <li>Кодты түзету</li>
-                    <li>Түсіндірме беру</li>
-                </ul>
-                <a href="https://chatgpt.com" target="_blank" class="btn">Ресми сайт</a>
-            </div>
+function addMessage(text) {
+    let div = document.createElement("div");
+    div.textContent = text;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+}
 
-            <div class="card">
-                <h2>Claude</h2>
-                <p>Үлкен деректермен жұмыс істеуге ыңғайлы, адамға жақын стильде жауап беретін ЖИ.</p>
-                <strong>Мүмкіндіктері:</strong>
-                <ul>
-                    <li>Құжаттарды талдау</li>
-                    <li>Таза код жазу</li>
-                </ul>
-                <a href="https://claude.ai" target="_blank" class="btn">Ресми сайт</a>
-            </div>
-        </div>
+// Қарапайым жауап логикасы
+function getBotReply(text) {
+    text = text.toLowerCase();
 
-        <section class="experience-section">
-            <h2>Менің тәжірибем</h2>
-            <p>Мен ЖИ құралдарын бағдарламалау кезіндегі қиын есептерді шешу үшін қолдандым. Бұл кодтың сапасын арттырып, жұмыс жылдамдығын екі есеге арттыруға көмектесті.</p>
-        </section>
-    </div>
-
-</body>
-</html>
+    if (text.includes("copilot")) {
+        return "GitHub Copilot — кодты автоматты жазуға көмектеседі.";
+    } else if (text.includes("chatgpt")) {
+        return "ChatGPT — код жазу, түсіндіру және debugging үшін қолданылады.";
+    } else if (text.includes("claude")) {
+        return "Claude — үлкен кодтарды талдауға өте жақсы.";
+    } else if (text.includes("сәлем")) {
+        return "Сәлем! Қалай көмектесе аламын?";
+    } else {
+        return "Кешіріңіз, мен бұл сұрақты түсінбедім 😅";
+    }
+}
+</script>
